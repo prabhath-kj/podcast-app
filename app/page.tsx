@@ -1,56 +1,76 @@
-import { Link } from "@heroui/link";
-import { Snippet } from "@heroui/snippet";
-import { Code } from "@heroui/code";
-import { button as buttonStyles } from "@heroui/theme";
+// app/page.tsx
+'use client'
+import { useState } from 'react'
+import { PodcastCard } from '@/components/PodcastCard'
+import { FloatingButton } from '@/components/FloatingButton'
 
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
+const samplePodcasts = [
+  {
+    id: '1',
+    title: 'The Vergecast',
+    channel: 'The Verge',
+    image: '/vergecast.jpg',
+  },
+  {
+    id: '2',
+    title: 'Decoder with Nilay Patel',
+    channel: 'The Verge',
+    image: '/vergecast.jpg',
+  },
+  {
+    id: '3',
+    title: 'The Daily',
+    channel: 'The New York Times',
+    image: '/vergecast.jpg',
+  },
+  {
+    id: '4',
+    title: 'Waveform: The MKBHD Podcast',
+    channel: 'Vox Media',
+    image: '/vergecast.jpg',
+  },
+  {
+    id: '5',
+    title: '99% Invisible',
+    channel: 'Roman Mars',
+    image: '/vergecast.jpg',
+  },
+  {
+    id: '6',
+    title: 'Accidental Tech Podcast',
+    channel: 'Marco Arment',
+    image: '/vergecast.jpg',
+  },
+]
 
 export default function Home() {
+  const [selected, setSelected] = useState<string[]>([])
+
+  const toggleSelect = (id: string) => {
+    setSelected((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    )
+  }
+
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
-        </span>
-        <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
-        </div>
+    <main className="p-4 pb-20 min-h-screen bg-white">
+      <h1 className="text-3xl font-bold mb-2">Add Podcasts</h1>
+      <h2 className="text-lg font-semibold mb-4">Popular on Queue</h2>
+
+      <div className="space-y-4">
+        {samplePodcasts.map((podcast) => (
+          <PodcastCard
+            key={podcast.id}
+            {...podcast}
+            selected={selected.includes(podcast.id)}
+            onSelect={() => toggleSelect(podcast.id)}
+          />
+        ))}
       </div>
 
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          href={siteConfig.links.docs}
-        >
-          Documentation
-        </Link>
-        <Link
-          isExternal
-          className={buttonStyles({ variant: "bordered", radius: "full" })}
-          href={siteConfig.links.github}
-        >
-          <GithubIcon size={20} />
-          GitHub
-        </Link>
-      </div>
-
-      <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
-          <span>
-            Get started by editing <Code color="primary">app/page.tsx</Code>
-          </span>
-        </Snippet>
-      </div>
-    </section>
-  );
+      {selected.length > 0 && (
+        <FloatingButton count={selected.length} />
+      )}
+    </main>
+  )
 }

@@ -1,0 +1,42 @@
+import { Button } from "@heroui/button";
+import { Card, CardHeader } from "@heroui/card";
+import Image from "next/image";
+
+type Props = {
+  id: string;
+  image: string;
+  title: string;
+  channel: string;
+  selected: boolean;
+  onSelect: () => void;
+};
+
+export function PodcastCard({ image, title, channel, selected, onSelect }: Props) {
+  return (
+    <Card className="w-full shadow-none px-2 py-1.5">
+      <CardHeader className="flex items-center justify-between gap-3 p-0">
+        <div className="flex items-center gap-3 flex-1 min-w-0">
+          <Image
+            src={image}
+            alt={title}
+            width={52}
+            height={52}
+            className="rounded-xl flex-shrink-0"
+          />
+          <div className="min-w-0">
+            <p className="text-sm font-semibold truncate">{title}</p>
+            <p className="text-xs text-gray-500 truncate">{channel}</p>
+          </div>
+        </div>
+        <Button
+          onClick={onSelect}
+          variant={selected ? "solid" : "ghost"}
+          color={selected ? "primary" : "default"}
+          className="text-sm rounded-full px-3 py-1"
+        >
+          {selected ? "Selected" : "Subscribe"}
+        </Button>
+      </CardHeader>
+    </Card>
+  );
+}
