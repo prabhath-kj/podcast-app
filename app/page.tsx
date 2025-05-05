@@ -1,4 +1,3 @@
-// app/page.tsx
 'use client'
 import { useState } from 'react'
 import { PodcastCard } from '@/components/PodcastCard'
@@ -53,11 +52,11 @@ export default function Home() {
   }
 
   return (
-    <main className="p-4 pb-20 min-h-screen bg-white">
+    <main className="relative p-4 pb-20 h-svh bg-white overflow-y-auto">
       <h1 className="text-3xl font-bold mb-2">Add Podcasts</h1>
       <h2 className="text-lg font-semibold mb-4">Popular on Queue</h2>
 
-      <div className="space-y-4">
+      <div className="space-y-6">
         {samplePodcasts.map((podcast) => (
           <PodcastCard
             key={podcast.id}
@@ -69,8 +68,10 @@ export default function Home() {
       </div>
 
       {selected.length > 0 && (
-        <FloatingButton count={selected.length} />
+        <FloatingButton count={selected.length}  />
       )}
+
+      <div className="pointer-events-none fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/50 to-transparent z-50" />
     </main>
   )
 }
