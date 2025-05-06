@@ -13,7 +13,7 @@ type Props = {
 
 export function PodcastCard({ image, title, channel, selected, onSelect }: Props) {
   return (
-    <Card className="w-full shadow-none px-4 py-2 bg-transparent">
+    <Card className="w-full shadow-none px-2 py-2 bg-transparent h-auto">
       <CardHeader className="flex items-center justify-between gap-3 p-0">
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <Image

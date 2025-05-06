@@ -42,6 +42,24 @@ const samplePodcasts = [
     channel: 'Marco Arment',
     image: '/vergecast.jpg',
   },
+  {
+    id: '7',
+    title: 'Accidental Tech Podcast',
+    channel: 'Marco Arment',
+    image: '/vergecast.jpg',
+  },
+  {
+    id: '9',
+    title: 'Accidental Tech Podcast',
+    channel: 'Marco Arment',
+    image: '/vergecast.jpg',
+  },
+  {
+    id: '10',
+    title: 'Accidental Tech Podcast',
+    channel: 'Marco Arment',
+    image: '/vergecast.jpg',
+  },
 ]
 
 export default function Home() {
@@ -57,11 +75,12 @@ export default function Home() {
   const selectedItems = samplePodcasts.filter((p) => selected.includes(p.id))
 
   return (
-    <main className="relative p-4 pb-20 h-svh bg-white overflow-y-auto">
-      <h1 className="text-3xl font-bold mb-2">Add Podcasts</h1>
-      <h2 className="text-lg font-semibold mb-4">Popular on Queue</h2>
+    <main className="relative p-4 pb-20 h-dvh bg-white flex flex-col">
+      <h1 className="text-3xl font-bold mb-2 shrink-0">Add Podcasts</h1>
+      <h2 className="text-lg font-semibold mb-4 shrink-0">Popular on Queue</h2>
 
-      <div className="space-y-6">
+      {/* Scrollable area for podcast cards */}
+      <div className="flex-1 overflow-y-auto space-y-6 pr-2 no-scrollbar">
         {samplePodcasts.map((podcast) => (
           <PodcastCard
             key={podcast.id}
@@ -88,7 +107,8 @@ export default function Home() {
         />
       )}
 
-      <div className="pointer-events-none fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/50 to-transparent z-50" />
+      <div className="pointer-events-none fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/50 to-transparent z-40" />
     </main>
+
   )
 }

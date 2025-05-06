@@ -33,32 +33,38 @@ export function BottomDrawer({ items, onClose, onRemove, onSave }: BottomDrawerP
         animate={{ y: '20%' }}
         exit={{ y: '100%' }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        className="fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-2xl flex flex-col p-4 h-[80vh]"
+        className="fixed bottom-0 left-0 right-0 bg-white z-50 rounded-t-2xl flex flex-col h-[80vh]"
       >
         {/* Header */}
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center p-4 border-b no-scrollbar">
           <h2 className="text-lg font-bold">Selected Podcasts</h2>
           <button onClick={onClose}>
             <XMarkIcon className="h-5 w-5 text-gray-600" />
           </button>
         </div>
 
-        {/* Scrollable List */}
-        <div className="flex-1 space-y-3 overflow-y-auto pb-4">
-          {items.map((p) => (
-            <PodcastCard
-              key={p.id}
-              {...p}
-              selected={true}
-              onSelect={() => onRemove(p.id)}
-            />
-          ))}
+        {/* Scrollable List with fixed height */}
+        <div className="overflow-y-auto px-4 space-y-3" style={{ height: 'calc(80vh - 300px)' }}>
+          {items.length > 0 ? (
+            items.map((p) => (
+              <PodcastCard
+                key={p.id}
+                {...p}
+                selected={true}
+                onSelect={() => onRemove(p.id)}
+              />
+            ))
+          ) : (
+            <div className="text-center text-gray-500 py-8">
+              No podcasts selected.
+            </div>
+          )}
         </div>
 
         {/* Save Button Footer */}
-        <div className="mt-4">
+        <div className="p-4 border-t">
           <button
-            className="w-full bg-black text-white py-3 rounded-xl text-sm font-semibold"
+            className="w-full rounded-full bg-gray-200 text-black text-sm font-semibold h-14 shadow-md"
             onClick={onSave}
           >
             Save
