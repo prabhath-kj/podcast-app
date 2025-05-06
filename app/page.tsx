@@ -4,63 +4,9 @@ import { useState } from 'react'
 import { PodcastCard } from '@/components/PodcastCard'
 import { FloatingButton } from '@/components/FloatingButton'
 import { BottomDrawer } from '@/components/BottomDrawer'
+import { samplePodcasts } from '@/lib/data'
 
-const samplePodcasts = [
-  {
-    id: '1',
-    title: 'The Vergecast',
-    channel: 'The Verge',
-    image: '/vergecast.jpg',
-  },
-  {
-    id: '2',
-    title: 'Decoder with Nilay Patel',
-    channel: 'The Verge',
-    image: '/vergecast.jpg',
-  },
-  {
-    id: '3',
-    title: 'The Daily',
-    channel: 'The New York Times',
-    image: '/vergecast.jpg',
-  },
-  {
-    id: '4',
-    title: 'Waveform: The MKBHD Podcast',
-    channel: 'Vox Media',
-    image: '/vergecast.jpg',
-  },
-  {
-    id: '5',
-    title: '99% Invisible',
-    channel: 'Roman Mars',
-    image: '/vergecast.jpg',
-  },
-  {
-    id: '6',
-    title: 'Accidental Tech Podcast',
-    channel: 'Marco Arment',
-    image: '/vergecast.jpg',
-  },
-  {
-    id: '7',
-    title: 'Accidental Tech Podcast',
-    channel: 'Marco Arment',
-    image: '/vergecast.jpg',
-  },
-  {
-    id: '9',
-    title: 'Accidental Tech Podcast',
-    channel: 'Marco Arment',
-    image: '/vergecast.jpg',
-  },
-  {
-    id: '10',
-    title: 'Accidental Tech Podcast',
-    channel: 'Marco Arment',
-    image: '/vergecast.jpg',
-  },
-]
+
 
 export default function Home() {
   const [selected, setSelected] = useState<string[]>([])
@@ -72,7 +18,7 @@ export default function Home() {
     )
   }
 
-  const selectedItems = samplePodcasts.filter((p) => selected.includes(p.id))
+  const selectedItems = samplePodcasts?.filter((p) => selected.includes(p.id))
 
   return (
     <main className="relative p-4 pb-20 h-dvh bg-white flex flex-col">
@@ -81,7 +27,7 @@ export default function Home() {
 
       {/* Scrollable area for podcast cards */}
       <div className="flex-1 overflow-y-auto space-y-6 pr-2 no-scrollbar">
-        {samplePodcasts.map((podcast) => (
+        {samplePodcasts?.map((podcast) => (
           <PodcastCard
             key={podcast.id}
             {...podcast}
