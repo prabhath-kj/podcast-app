@@ -1,7 +1,9 @@
 'use client'
+
 import { useState } from 'react'
 import { PodcastCard } from '@/components/PodcastCard'
 import { FloatingButton } from '@/components/FloatingButton'
+import { BottomDrawer } from '@/components/BottomDrawer'
 
 const samplePodcasts = [
   {
@@ -44,12 +46,15 @@ const samplePodcasts = [
 
 export default function Home() {
   const [selected, setSelected] = useState<string[]>([])
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const toggleSelect = (id: string) => {
     setSelected((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
     )
   }
+
+  const selectedItems = samplePodcasts.filter((p) => selected.includes(p.id))
 
   return (
     <main className="relative p-4 pb-20 h-svh bg-white overflow-y-auto">
@@ -68,7 +73,19 @@ export default function Home() {
       </div>
 
       {selected.length > 0 && (
-        <FloatingButton count={selected.length}  />
+        <FloatingButton count={selected.length} onClick={() => setDrawerOpen(true)} />
+      )}
+
+      {drawerOpen && (
+        <BottomDrawer
+          items={selectedItems}
+          onClose={() => setDrawerOpen(false)}
+          onRemove={(id) => setSelected((prev) => prev.filter((x) => x !== id))}
+          onSave={() => {
+            setDrawerOpen(false)
+            alert('Saved!')
+          }}
+        />
       )}
 
       <div className="pointer-events-none fixed bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black/50 to-transparent z-50" />

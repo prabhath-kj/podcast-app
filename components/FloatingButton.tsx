@@ -1,12 +1,14 @@
 'use client'
+
 import { Button } from '@heroui/button'
 import { motion } from 'framer-motion'
 
-type Props = {
+interface FloatingButtonProps {
   count: number
+  onClick: () => void
 }
 
-export function FloatingButton({ count }: Props) {
+export function FloatingButton({ count, onClick }: FloatingButtonProps) {
   return (
     <motion.div
       initial={{ y: 100, opacity: 0 }}
@@ -16,6 +18,7 @@ export function FloatingButton({ count }: Props) {
     >
       <Button
         fullWidth
+        onClick={onClick}
         className="w-full rounded-full bg-gray-200 text-black text-sm font-semibold h-14 shadow-md"
       >
         Show Added ({count})
