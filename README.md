@@ -1,53 +1,30 @@
-# Next.js & HeroUI Template
+# Podcast Web App
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+## Overview
 
-[Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
+A Next.js web application where users can browse, select, and save their favorite podcasts from a large list. The app fetches podcast data from a GraphQL API, allows users to manage selected podcasts.
 
-## Technologies Used
+## Features
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [HeroUI v2](https://heroui.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+- **Browse Podcasts**: View a large list of podcasts, each with a title, image, and channel name.
+- **Subscribe Button**: Toggle between "Subscribe" and "Selected" when removing podcasts to/from the selected list.
+- **Animated Bottom Drawer**: View selected podcasts in an animated bottom drawer and delete them as needed.
+- **Save Selected Podcasts**: Save selected podcasts to a backend GraphQL API.
 
-## How to Use
 
-### Use the template with create-next-app
+## Tech Stack
 
-To create a new project based on this template using `create-next-app`, run the following command:
+- **Next.js** (with TypeScript)
+- **GraphQL API** for fetching podcast data
+- **Tailwind CSS** for styling
+- **HeroUI** for UI components
+- **Tanstack Query** for data fetching and state management
+- **Tanstack Virtual** to optimize the list
 
-```bash
-npx create-next-app -e https://github.com/heroui-inc/next-app-template
-```
+## Installation
 
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
+### Clone the repository
 
 ```bash
-npm install
-```
-
-### Run the development server
-
-```bash
-npm run dev
-```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@heroui/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/heroui-inc/next-app-template/blob/main/LICENSE).
+git clone https://github.com/prabhath-kj/podcast-app.git
+cd podcast-app
