@@ -108,7 +108,7 @@ export default function Home() {
 
           {drawerOpen && (
             <BottomDrawer
-              items={selectedItems}
+              items={selectedItems!}
               onClose={() => setDrawerOpen(false)}
               onRemove={(id) => removeSelected(id)}
               onSave={() => save()}
