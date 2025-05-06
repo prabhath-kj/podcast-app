@@ -5,7 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { PodcastCard } from './PodcastCard'
 
 type Podcast = {
-  id: string
+  _id: string
   title: string
   image: string
   channel: string
@@ -48,10 +48,10 @@ export function BottomDrawer({ items, onClose, onRemove, onSave }: BottomDrawerP
           {items.length > 0 ? (
             items.map((p) => (
               <PodcastCard
-                key={p.id}
+                key={p._id}
                 {...p}
                 selected={true}
-                onSelect={() => onRemove(p.id)}
+                onSelect={() => onRemove(p._id)}
               />
             ))
           ) : (

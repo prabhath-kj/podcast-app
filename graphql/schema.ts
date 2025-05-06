@@ -1,11 +1,10 @@
-// graphql/schema.ts
-import { gql } from "apollo-server-micro";
+import { gql } from 'graphql-tag';
 
 export const typeDefs = gql`
   type Podcast {
-    id: ID!
+    _id: ID!
     title: String!
-    channelName: String!
+    channel: String!
     image: String!
   }
 

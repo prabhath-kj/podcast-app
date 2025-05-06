@@ -3,7 +3,7 @@ import { Card, CardHeader } from "@heroui/card";
 import Image from "next/image";
 
 type Props = {
-  id: string;
+  _id: string;
   image: string;
   title: string;
   channel: string;
@@ -21,8 +21,11 @@ export function PodcastCard({ image, title, channel, selected, onSelect }: Props
             alt={title}
             width={52}
             height={52}
+            placeholder="blur"
+            blurDataURL="LbHx5{s;D{Ro8|j=bwWGs^WAW*of"
             className="rounded-xl flex-shrink-0 object-cover"
           />
+
           <div className="min-w-0">
             <p className="text-base font-bold text-black truncate">{title}</p>
             <p className="text-xs text-gray-500 truncate">{channel}</p>

@@ -1,17 +1,33 @@
-// pages/api/graphql.ts
-import { ApolloServer } from "apollo-server-micro";
-import { typeDefs } from "@/graphql/schema";
-import { resolvers } from "@/graphql/resolvers";
-import { connectToDatabase } from "@/lib/db";
+// app/api/graphql/route.ts
+import { ApolloServer } from '@apollo/server';
+import { startServerAndCreateNextHandler } from '@as-integrations/next';
+import { typeDefs } from '@/graphql/schema';
+import { resolvers } from '@/graphql/resolvers';
+import { connectToDatabase } from '@/lib/db';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-const server = new ApolloServer({ typeDefs, resolvers });
+// Initialize Apollo Server
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
-export const config = { api: { bodyParser: false } };
-
-const startServer = server.start();
-
-export default async function handler(req: any, res: any) {
+// Create the handler for the API route
+const handler = startServerAndCreateNextHandler(server, {
+  context: async (req: NextApiRequest, res: NextApiResponse) => {
     await connectToDatabase();
-    await startServer;
-    return server.createHandler({ path: "/api/graphql" })(req, res);
+    return {
+      req,
+      res,
+    };
+  },
+});
+
+// Named exports for HTTP methods
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  return handler(req, res);
+}
+
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
+  return handler(req, res);
 }

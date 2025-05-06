@@ -3,9 +3,9 @@ import { gql } from 'graphql-request';
 export const GET_PODCASTS = gql`
   query GetPodcasts {
     podcasts {
-      id
+      _id
       title
-      channelName
+      channel
       image
     }
   }
