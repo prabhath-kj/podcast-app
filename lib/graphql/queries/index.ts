@@ -16,9 +16,9 @@ export const GET_PODCASTS = gql`
 export const GET_USER_SELECTION = gql`
   query GetUserSelection($userId: String!) {
     userSelection(userId: $userId) {
-      id
+      _id
       title
-      channelName
+      channel
       image
     }
   }

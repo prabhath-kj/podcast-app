@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { PodcastCard } from './PodcastCard'
 
-type Podcast = {
+export type Podcast = {
   _id: string
   title: string
   image: string
@@ -16,9 +16,16 @@ type BottomDrawerProps = {
   onClose: () => void
   onRemove: (id: string) => void
   onSave: () => void
+  isSaving: boolean
 }
 
-export function BottomDrawer({ items, onClose, onRemove, onSave }: BottomDrawerProps) {
+export function BottomDrawer({
+  items,
+  onClose,
+  onRemove,
+  onSave,
+  isSaving,
+}: BottomDrawerProps) {
   return (
     <>
       {/* Backdrop */}
@@ -43,8 +50,11 @@ export function BottomDrawer({ items, onClose, onRemove, onSave }: BottomDrawerP
           </button>
         </div>
 
-        {/* Scrollable List with fixed height */}
-        <div className="overflow-y-auto px-4 space-y-3" style={{ height: 'calc(80vh - 300px)' }}>
+        {/* Scrollable List */}
+        <div
+          className="overflow-y-auto px-4 space-y-3"
+          style={{ height: 'calc(80vh - 300px)' }}
+        >
           {items.length > 0 ? (
             items.map((p) => (
               <PodcastCard
@@ -64,10 +74,11 @@ export function BottomDrawer({ items, onClose, onRemove, onSave }: BottomDrawerP
         {/* Save Button Footer */}
         <div className="p-4 border-t">
           <button
-            className="w-full rounded-full bg-gray-200 text-black text-sm font-semibold h-14 shadow-md"
+            className="w-full rounded-full bg-gray-200 text-black text-sm font-semibold h-14 shadow-md disabled:opacity-50"
             onClick={onSave}
+            disabled={isSaving}
           >
-            Save
+            {isSaving ? 'Saving...' : 'Save'}
           </button>
         </div>
       </motion.div>

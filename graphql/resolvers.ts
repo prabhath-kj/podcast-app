@@ -6,8 +6,9 @@ export const resolvers = {
         podcasts: async () => await podcastModel.find({}),
         userSelection: async (_: any, { userId }: any) => {
             const user = await userSelectionModel.findOne({ userId });
+            
             if (!user) return [];
-            const podcasts = await podcastModel.find({ id: { $in: user.selectedPodcastIds } });
+            const podcasts = await podcastModel.find({ _id: { $in: user.selectedPodcastIds } });
             return podcasts;
         },
     },

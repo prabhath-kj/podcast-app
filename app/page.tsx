@@ -10,10 +10,18 @@ import { PodcastCard } from '@/components/PodcastCard'
 import { FloatingButton } from '@/components/FloatingButton'
 import { BottomDrawer } from '@/components/BottomDrawer'
 import { SkeletonLoader } from '@/components/SkeletonLoader'
+import { usePodcastSelection } from '@/hooks/usePodcastSelection'
 
 
 export default function Home() {
-  const [selected, setSelected] = useState<string[]>([])
+
+  const {
+    selected,
+    toggleSelect,
+    removeSelected,
+    save,
+    isSaving
+  } = usePodcastSelection()
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   // Fetch podcasts using GraphQL
@@ -34,11 +42,7 @@ export default function Home() {
     overscan: 5,
   })
 
-  const toggleSelect = (id: string) => {
-    setSelected((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    )
-  }
+
 
   const selectedItems = data?.filter((p) => selected.includes(p._id))
 
@@ -59,7 +63,7 @@ export default function Home() {
                   transform: `translateY(${index * 120}px)`,
                 }}
               >
-                <SkeletonLoader/>
+                <SkeletonLoader />
               </div>
             ))}
           </div>
@@ -106,11 +110,9 @@ export default function Home() {
             <BottomDrawer
               items={selectedItems}
               onClose={() => setDrawerOpen(false)}
-              onRemove={(id) => setSelected((prev) => prev.filter((x) => x !== id))}
-              onSave={() => {
-                setDrawerOpen(false)
-                alert('Saved!')
-              }}
+              onRemove={(id) => removeSelected(id)}
+              onSave={() => save()}
+              isSaving={isSaving}
             />
           )}
         </>
