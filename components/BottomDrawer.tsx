@@ -3,13 +3,9 @@
 import { motion } from 'framer-motion'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { PodcastCard } from './PodcastCard'
+import { Podcast } from '@/types'
 
-export type Podcast = {
-  _id: string
-  title: string
-  image: string
-  channel: string
-}
+
 
 type BottomDrawerProps = {
   items: Podcast[]

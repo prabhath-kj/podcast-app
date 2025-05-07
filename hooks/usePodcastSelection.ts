@@ -6,16 +6,13 @@ import { v4 as uuidv4 } from 'uuid'
 import { client } from '@/lib/graphql/graphqlClient'
 import { GET_USER_SELECTION } from '@/lib/graphql/queries'
 import { SAVE_SELECTION } from '@/lib/graphql/mutations'
-import { Podcast } from '@/components/BottomDrawer'
+import { GetUserSelectionResponse, Podcast } from '@/types'
 
-type GetUserSelectionResponse = {
-  userSelection: Podcast[]
-}
 
 export function usePodcastSelection() {
   const [userId, setUserId] = useState('')
   const [selected, setSelected] = useState<string[]>([])
-console.log(selected);
+  console.log(selected);
 
   // Generate or load userId from localStorage
   useEffect(() => {
@@ -31,14 +28,14 @@ console.log(selected);
 
   // Fetch saved selection from server
   const { data, isLoading } = useQuery({
-  queryKey: ['userSelection', userId],
-  queryFn: async () => {
-    const res = await client.request<GetUserSelectionResponse>(GET_USER_SELECTION, { userId })
-    return res.userSelection.map((p) => p._id)
-  },
-  enabled: !!userId,
-  
-})
+    queryKey: ['userSelection', userId],
+    queryFn: async () => {
+      const res = await client.request<GetUserSelectionResponse>(GET_USER_SELECTION, { userId })
+      return res.userSelection.map((p) => p._id)
+    },
+    enabled: !!userId,
+
+  })
 
 
 
@@ -57,7 +54,7 @@ console.log(selected);
       setSelected(data);
     }
   }, [data]);
-  
+
   // Toggle selection
   const toggleSelect = (id: string) => {
     setSelected((prev) =>

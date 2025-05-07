@@ -11,6 +11,7 @@ import { FloatingButton } from '@/components/FloatingButton'
 import { BottomDrawer } from '@/components/BottomDrawer'
 import { SkeletonLoader } from '@/components/SkeletonLoader'
 import { usePodcastSelection } from '@/hooks/usePodcastSelection'
+import { Podcast } from '@/types'
 
 
 export default function Home() {
@@ -28,7 +29,7 @@ export default function Home() {
   const { data, isLoading } = useQuery({
     queryKey: ['podcasts'],
     queryFn: async () => {
-      const res = await client.request<{ podcasts: { _id: string; image: string; title: string; channel: string }[] }>(GET_PODCASTS)
+      const res = await client.request<{ podcasts: Podcast[] }>(GET_PODCASTS)
       return res?.podcasts
     },
   })
